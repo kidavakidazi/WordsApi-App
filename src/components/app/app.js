@@ -37,8 +37,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const wordDefinition = await wapiService.getDefinition(word);
-        setDefinition(wordDefinition);
+        setDefinition(await wapiService.getDefinition(word));
       } catch (err) {
           console.log(err)
         if (word !== '') {
