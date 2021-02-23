@@ -1,9 +1,8 @@
-/*.header {*/
-/*    margin: auto;*/
-/*    padding: 10px;*/
-/*    align-self: start;*/
-
-/*}*/
+.header {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
 
 /*.header--button__home {*/
 /*    margin-left: 50px;*/
