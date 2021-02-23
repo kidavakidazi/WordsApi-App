@@ -57,18 +57,11 @@ const WordDetails = () => {
   const [ typeOf, setTypeOf ] = useState('')
 
   const fetchData = async (wordName) => {
-    const wordDefinition = await wapiService.getDefinition(wordName);
-      setDefinition(wordDefinition);
 
-    const partOf = await wapiService.getPartOfSpeech(wordName);
-      setPartOfSpeech(partOf);
-
-    const syllableItems = await wapiService.getSyllables(wordName);
-    const syllab = syllableItems.toString();
-      setSyllables(syllab.replace(/,/g, '•'));
-
-    const pronounce = await wapiService.getPronunciation(wordName);
-      setPronunciation(pronounce);
+    setDefinition(await wapiService.getDefinition(wordName));
+    setPartOfSpeech(await wapiService.getPartOfSpeech(wordName));
+    setSyllables(await wapiService.getSyllables(wordName));
+    setPronunciation(await wapiService.getPronunciation(wordName));
 
     const synonyms = await wapiService.getSynonyms(wordName);
     const syn = synonyms.map(el => (
@@ -99,7 +92,6 @@ const WordDetails = () => {
       <Paper className={classes.paper}>{el}</Paper>
     ));
       setTypeOf(typeOfItem);
-
   };
 
   const changeLabel = (el) => {
