@@ -5,7 +5,7 @@ export default class WapiService {
 
   async getData(wordName) {
 
-    const API_KEY = `/.netlify/functions/getApiKey`
+    const API_KEY = `../../../netlify/functions/getApiKey`
     const response = await fetch(`${this._apiBase}${wordName}`, {
       "method": "GET",
       "headers": {
