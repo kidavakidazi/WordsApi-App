@@ -2,7 +2,6 @@ export default class WapiService {
 
   _apiBase = 'https://wordsapiv1.p.rapidapi.com/words/';
 
-
   async getData(wordName) {
     const response = await fetch(`${this._apiBase}${wordName}`, {
       "method": "GET",
@@ -46,6 +45,8 @@ export default class WapiService {
   getSyllables(wordName) {
     return this.getData(wordName)
       .then(res => res.syllables.list)
+      .then(res => res.toString())
+      .then(res => res.replace(/,/g, '•'))
       .catch(() => 'No info');
   };
 
