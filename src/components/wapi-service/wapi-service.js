@@ -2,12 +2,15 @@ export default class WapiService {
 
   _apiBase = 'https://wordsapiv1.p.rapidapi.com/words/';
 
+
   async getData(wordName) {
+
+    const API_KEY = `/.netlify/functions/getApiKey`
     const response = await fetch(`${this._apiBase}${wordName}`, {
       "method": "GET",
       "headers": {
         "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-        "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`
+        "x-rapidapi-key": `${API_KEY}`
       }
     });
     return await response.json();
