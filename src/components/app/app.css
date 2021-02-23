@@ -1,0 +1,7 @@
+.word--definition {
+    position: relative;
+    font-size: 30px;
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 5%;
+}
