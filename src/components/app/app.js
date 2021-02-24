@@ -6,20 +6,20 @@ import WapiService from "../wapi-service/wapi-service";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 import './app.css';
+
+require('dotenv').config()
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(2),
-  },
-  paper: {
-    minWidth: 150,
-    margin: theme.spacing(15),
-    padding: theme.spacing(3),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    listStyle: 'none',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   },
 }));
 
@@ -45,6 +45,7 @@ const App = () => {
         }
       }
     };
+
     fetchData();
     setStorage([...storage, word]);
   }, [word]);
@@ -75,13 +76,10 @@ const App = () => {
     else {
       let lastViewedWords = viewedWords.slice(-5)
       return  lastViewedWords.map(el => (
-        <Grid item xs={3}>
           <Link to="/word" onClick={() => changeContext(el)}>
-            <Paper className={classes.paper} elevation={3}>
-              {el}
-            </Paper>
+              <Chip label={el} component="a" clickable />
           </Link>
-        </Grid>)).slice(1);
+      )).slice(1);
     }
   };
 
@@ -89,17 +87,16 @@ const App = () => {
     return  (
       <>
         <WordAddForm addWord={addWord} />
+        <div className={classes.root}>
+            <SearchedWords />
+        </div>
         <div className="word--definition"
              onClick={changeContext(word)}>
           <Link to="/word">
             {word.toUpperCase()} {definition}
           </Link>
         </div>
-        <div className={classes.root}>
-          <Grid container direction="row">
-            <SearchedWords />
-          </Grid>
-        </div>
+
       </>
     );
   };
