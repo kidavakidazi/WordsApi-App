@@ -1,15 +1,9 @@
+require('dotenv').config();
+
 export default class WapiService {
 
-  _apiBase = 'https://wordsapiv1.p.rapidapi.com/words/';
-
-  async getData(wordName) {
-    const response = await fetch(`${this._apiBase}${wordName}`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-        "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`
-      }
-    });
+  async getData(wordLabel) {
+    const response = await fetch(`/.netlify/functions/getApiKey?wordLabel=${wordLabel}`);
     return await response.json();
   };
 
