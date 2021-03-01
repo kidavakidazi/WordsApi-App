@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect} from "react";
 import { WordContext} from "../app/app";
 import WapiService from "../wapi-service/wapi-service";
 import { Link } from "react-router-dom";
+import { generateUniqueID } from "web-vitals/dist/modules/lib/generateUniqueID";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -65,7 +66,7 @@ const WordDetails = () => {
 
     const synonyms = await wapiService.getSynonyms(wordName);
     const syn = synonyms.map(el => (
-        <Link to="/word" onClick={() => changeLabel(el)}>
+        <Link key={generateUniqueID()} to="/word" onClick={() => changeLabel(el)}>
           <Paper className={classes.paper}>{el}</Paper>
         </Link>
     ));
@@ -73,7 +74,7 @@ const WordDetails = () => {
 
     const antonyms = await wapiService.getAntonyms(wordName);
     const ant = antonyms.map(el => (
-      <Link to="/word" onClick={() => changeLabel(el)}>
+      <Link key={generateUniqueID()} to="/word" onClick={() => changeLabel(el)}>
         <Paper className={classes.paper}>{el}</Paper>
       </Link>
     ));
@@ -81,7 +82,7 @@ const WordDetails = () => {
 
     const similar = await wapiService.getSimilar(wordName);
     const sim = similar.map(el => (
-      <Link to="/word" onClick={() => changeLabel(el)}>
+      <Link key={generateUniqueID()} to="/word" onClick={() => changeLabel(el)}>
         <Paper className={classes.paper}>{el}</Paper>
       </Link>
     ));
@@ -89,7 +90,7 @@ const WordDetails = () => {
 
     const typeOfItems = await wapiService.getTypeOf(wordName);
     const typeOfItem = typeOfItems.map(el => (
-      <Paper className={classes.paper}>{el}</Paper>
+      <Paper key={generateUniqueID()} className={classes.paper}>{el}</Paper>
     ));
       setTypeOf(typeOfItem);
   };
