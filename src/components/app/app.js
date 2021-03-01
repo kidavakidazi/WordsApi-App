@@ -74,7 +74,7 @@ const App = () => {
       let lastViewedWords = viewedWords.slice(-5)
       return  lastViewedWords.map(el => (
           <Link key={generateUniqueID()} to="/word" onClick={() => setContext(el)}>
-              <Chip label={el} component="a" clickable />
+              <Chip label={el} component="span" clickable />
           </Link>
       )).slice(1);
     }
