@@ -4,6 +4,7 @@ import WordAddForm from "../word-add-form/word-add-form";
 import WordDetails from "../word-details/word-details";
 import WapiService from "../wapi-service/wapi-service";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { generateUniqueID } from "web-vitals/dist/modules/lib/generateUniqueID";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
@@ -65,10 +66,6 @@ const App = () => {
     localStorage.setItem('lastWords', JSON.stringify(storage));
   });
 
-  const changeContext = (el) => {
-    setContext(el);
-  };
-
   const SearchedWords = () => {
     let viewedWordsArray = localStorage.getItem('lastWords');
     let viewedWords = JSON.parse(viewedWordsArray);
@@ -76,8 +73,8 @@ const App = () => {
     else {
       let lastViewedWords = viewedWords.slice(-5)
       return  lastViewedWords.map(el => (
-          <Link to="/word" onClick={() => changeContext(el)}>
-              <Chip label={el} component="a" clickable />
+          <Link key={generateUniqueID()} to="/word" onClick={() => setContext(el)}>
+              <Chip label={el} component="span" clickable />
           </Link>
       )).slice(1);
     }
@@ -91,7 +88,7 @@ const App = () => {
             <SearchedWords />
         </div>
         <div className="word--definition"
-             onClick={changeContext(word)}>
+             onClick={() => setContext(word)}>
           <Link to="/word">
             {word.toUpperCase()} {definition}
           </Link>
